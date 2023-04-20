@@ -5,43 +5,62 @@
 # +--------------------------------------------+
 
 import hashlib
-import os
 import time
+import random
+import string
 import matplotlib.pyplot as plt
-import numpy as np
 
-def generate_random_message(length=64):
-    return os.urandom(length)
+# Function to generate a random message of a given length
+def generate_random_message(length=32):
+    # Randomly select characters from the set of ASCII letters and digits, and join them into a string
+    return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
 
-def sha256_hash(message):
-    return hashlib.sha256(message).hexdigest()
-
-def solve_crypto_puzzle(B, n_trials=10):
-    target = 2 ** (256 - B)
+# Function to solve the puzzle for a given number of bits (B) and a number of trials
+def solve_puzzle(B, trials=1000):
+    # Initialize the total time variable
     total_time = 0
-
-    for trial in range(n_trials):
+    
+    # Perform the specified number of trials
+    for _ in range(trials):
+        # Generate a random puzzle with B bits
+        puzzle = format(random.randint(0, 2**B-1), f'0{B}b')
+        # Record the start time of the trial
         start_time = time.time()
-        found = False
-        while not found:
+        
+        # Continue generating random messages and checking their hashes until a solution is found
+        while True:
+            # Generate a random message
             message = generate_random_message()
-            hashed_message = sha256_hash(message)
-            if int(hashed_message, 16) % target == 0:
-                found = True
-        end_time = time.time()
-        total_time += (end_time - start_time)
+            # Calculate the SHA-256 hash of the message
+            sha256_hash = hashlib.sha256(message.encode()).hexdigest()
+            # Convert the hexadecimal hash to a binary representation
+            binary_hash = format(int(sha256_hash, 16), '0256b')
+            
+            # Check if the last B bits of the binary hash match the puzzle
+            if binary_hash[-B:] == puzzle:
+                # If a match is found, break out of the loop
+                break
+                
+        # Update the total time with the time spent on the current trial
+        total_time += time.time() - start_time
+    
+    # Calculate the average time by dividing the total time by the number of trials
+    return total_time / trials
 
-        print(f'Trial {trial + 1} of {n_trials} for B = {B} completed')
-
-    average_time = total_time / n_trials
-    return average_time
-
+# Define a list of B values for which to test the puzzle
 B_values = [4, 8, 12, 16]
-average_times = [solve_crypto_puzzle(B) for B in B_values]
+# Initialize a list to store the average times for each B value
+average_times = []
 
-plt.plot(B_values, average_times, marker='o')
-plt.xlabel('B')
+# Calculate the average time for each B value and store the results
+for B in B_values:
+    average_time = solve_puzzle(B)
+    average_times.append(average_time)
+    print(f"B: {B}, Average Time: {average_time}")
+
+# Plot the average times against the B values
+plt.plot(B_values, average_times)
+plt.xlabel('B bits')
 plt.ylabel('Average Time (seconds)')
-plt.title('Time Cost vs Puzzle Complexity (B)')
-plt.grid(True)
+plt.title('Average Time to Solve Crypto Puzzle vs. B')
 plt.show()
