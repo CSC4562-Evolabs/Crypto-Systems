@@ -1,6 +1,6 @@
 # +--------------------------------------------+
 # |       Created by: Sean R Chappell          |
-# |       For: CSC4562 - Project 2 - SHA 256   |
+# |For: CSC4562 - Project 2 - Exhaustive Search|
 # |       On: April 24th, 2023                 |
 # +--------------------------------------------+
 
