@@ -1,3 +1,5 @@
+#!/bin/python3
+
 # John Hudnall
 # CSC 4562 Project 2
 # RSA Encryption and Decryption Algorithms

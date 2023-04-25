@@ -1,3 +1,5 @@
+#!/bin/python3
+
 # +--------------------------------------------+
 # |       Created by: Sean R Chappell          |
 # |For: CSC4562 - Project 2 - Exhaustive Search|
@@ -45,8 +47,16 @@ def find_private_key(e, n):
     return d, p, q, time_cost
 
 # Example public key
-e = 926933
-n = 1185137
+#e = 926933
+#n = 1185137
+
+# Get user input for public key
+print("enter public key:")
+print("e: ",end="")
+e = int(input())
+print("n: ",end="")
+n = int(input())
+
 
 d, p, q, time_cost = find_private_key(e, n)
 print(f"Private key d: {d}")
