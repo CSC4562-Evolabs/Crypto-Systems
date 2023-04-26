@@ -60,7 +60,7 @@ def binary_to_hex(s):
 # Binary to decimal conversion
  
  
-def bin2dec(binary):
+def convert_binary_to_decimal(binary):
  
     binary1 = binary
     decimal, i, n = 0, 0, 0
@@ -74,7 +74,7 @@ def bin2dec(binary):
 # Decimal to binary conversion
  
  
-def dec2bin(num):
+def convert_decimal_to_binary(num):
     res = bin(num).replace("0b", "")
     if(len(res) % 4 != 0):
         div = len(res) / 4
@@ -220,11 +220,11 @@ def encrypt(pt, rkb, rk, printOutput):
         # S-boxex: substituting the value from s-box table by calculating row and column
         sbox_str = ""
         for j in range(0, 8):
-            row = bin2dec(int(xor_x[j * 6] + xor_x[j * 6 + 5]))
-            col = bin2dec(
+            row = convert_binary_to_decimal(int(xor_x[j * 6] + xor_x[j * 6 + 5]))
+            col = convert_binary_to_decimal(
                 int(xor_x[j * 6 + 1] + xor_x[j * 6 + 2] + xor_x[j * 6 + 3] + xor_x[j * 6 + 4]))
             val = sbox[j][row][col]
-            sbox_str = sbox_str + dec2bin(val)
+            sbox_str = sbox_str + convert_decimal_to_binary(val)
  
         # Straight D-box: After substituting rearranging the bits
         sbox_str = permute(sbox_str, per, 32)
@@ -251,14 +251,14 @@ def encrypt(pt, rkb, rk, printOutput):
 if __name__ == "__main__":
     print("Enter your plaintest (in hex):", end="")
     pt = input();
+    #Example Plaintext
     #pt = "123456ABCD132536"
 
     print("Enter your key (in hex):", end="")
     key = input();
+    #Example key
     #key = "AABB09182736CCDD"
     
-    # Key generation
-    # --hex to binary
     key = hex_to_binary(key)
     
     # --parity bit drop table
