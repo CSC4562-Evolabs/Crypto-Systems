@@ -1,3 +1,5 @@
+#!/bin/python3
+
 # +--------------------------------------------+
 # |       Created by: Sean R Chappell          |
 # |       For: CSC4562 - Project 2 - SHA 256   |

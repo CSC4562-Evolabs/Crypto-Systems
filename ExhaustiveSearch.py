@@ -1,3 +1,5 @@
+#!/bin/python3
+
 # +--------------------------------------------+
 # |       Created by: Sean R Chappell          |
 # |For: CSC4562 - Project 2 - Exhaustive Search|
@@ -53,8 +55,17 @@ def find_private_key(e, n):
     time_cost = time.time() - start_time
     return d, p, q, time_cost
 
-e = 926933
-n = 1185137
+# Example public key
+#e = 926933
+#n = 1185137
+
+# Get user input for public key
+print("enter public key:")
+print("e: ",end="")
+e = int(input())
+print("n: ",end="")
+n = int(input())
+
 
 # Find the private key (d) and prime factors (p, q) for 
 # the given public key (e, n)
