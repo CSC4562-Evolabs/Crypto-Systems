@@ -1,9 +1,6 @@
 #!/bin/python3
-
-# Python3 code for the above approach
  
 # Hexadecimal to binary conversion
-
 def hex_to_binary(s):
     mp = {'0': "0000",
           '1': "0001",
@@ -27,8 +24,6 @@ def hex_to_binary(s):
     return bin
  
 # Binary to hexadecimal conversion
- 
- 
 def binary_to_hex(s):
     mp = {"0000": '0',
           "0001": '1',
@@ -57,9 +52,7 @@ def binary_to_hex(s):
  
     return hex
  
-# Binary to decimal conversion
- 
- 
+# Binary to decimal conversion 
 def convert_binary_to_decimal(binary):
  
     binary1 = binary
@@ -72,8 +65,6 @@ def convert_binary_to_decimal(binary):
     return decimal
  
 # Decimal to binary conversion
- 
- 
 def convert_decimal_to_binary(num):
     res = bin(num).replace("0b", "")
     if(len(res) % 4 != 0):
@@ -84,9 +75,7 @@ def convert_decimal_to_binary(num):
             res = '0' + res
     return res
  
-# Permute function to rearrange the bits
- 
- 
+# Permute function to rearrange the bits 
 def permute(k, arr, n):
     permutation = ""
     for i in range(0, n):
@@ -94,8 +83,6 @@ def permute(k, arr, n):
     return permutation
  
 # shifting the bits towards left by nth shifts
- 
- 
 def shift_left(k, nth_shifts):
     s = ""
     for i in range(nth_shifts):
@@ -106,9 +93,7 @@ def shift_left(k, nth_shifts):
         s = ""
     return k
  
-# calculating xow of two strings of binary number a and b
- 
- 
+# calculating xow of two strings of binary number a and b 
 def xor(a, b):
     ans = ""
     for i in range(len(a)):
